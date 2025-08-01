@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HATCHLINGSTORE.id</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      margin: 0;
+      padding: 0;
+      background: #fefefe;
+    }
+    header {
+      background-color: #137d35;
+      color: rgb(14, 14, 14);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-center {
+      text-align: center;
+      flex-grow: 1;
+    }
+    header img {
+      height: 60px;
+      width: auto;
+    }
+    main {
+      padding: 20px;
+    }
+    .menu-section {
+      margin-bottom: 30px;
+    }
+    .menu-section h2 {
+      border-bottom: 2px solid #d30000;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .menu-info {
+      flex: 1;
+    }
+    .menu-item button {
+      background-color: #c22724;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .menu-item button:hover {
+      background-color: #1e8449;
+    }
+    #order-list {
+      margin-top: 40px;
+      padding: 20px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+    button[type="submit"] {
+      background-color: #198829;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background-color: #198829;
+    }
+    footer {
+      background-color: #137d35;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+      }
+      header img {
+        height: 40px;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- Ganti src dengan path logo kamu -->
+    <img src="https://cdn.shopify.com/s/files/1/0837/8712/0919/files/DragonflyIcon.webp?v=1749590411&width=400" alt="Logo Kiri" style="height: 170px; width: auto;" />
+
+    <div class="header-center">
+      <h1>HATCHLINGSTORE.id</h1>
+      <p>"Dijamin Amanah Dan Terpercaya"</p>
+    </div>
+    <img src="https://cdn.shopify.com/s/files/1/0815/2068/9482/files/bee.png?v=1749356773" alt="Logo Kiri" style="height: 170px; width: auto;" />
+
+  </header>
+
+  <main>
+    <section class="menu-section">
+      <h2>Pet</h2>
+      <div class="menu-item">
+        <div class="menu-info">Dragonfly - Rp 35.000</div>
+        <button onclick="tambahPesanan('Dragonfly', 35000)">Tambah ke Pesanan</button>
+      </div>
+      <div class="menu-item">
+        <div class="menu-info">Queen Bee - Rp 35.000</div>
+        <button onclick="tambahPesanan('Queen Bee', 35000)">Tambah ke Pesanan</button>
+      </div>
+      <div class="menu-item">
+        <div class="menu-info">Racoon - Rp 70.000</div>
+        <button onclick="tambahPesanan('Racoon', 70000)">Tambah ke Pesanan</button>
+      </div>
+    </section>
+
+    <section class="menu-section">
+      <h2>Sheckles</h2>
+      <div class="menu-item">
+        <div class="menu-info">1,8 T - Rp 500</div>
+        <button onclick="tambahPesanan('1,8 T', 500)">Tambah ke Pesanan</button>
+      </div>
+      <div class="menu-item">
+        <div class="menu-info">58 T - Rp 2.000</div>
+        <button onclick="tambahPesanan('58 T', 2000)">Tambah ke Pesanan</button>
+      </div>
+      <div class="menu-item">
+        <div class="menu-info">744t - Rp 7.000</div>
+        <button onclick="tambahPesanan('744t', 7000)">Tambah ke Pesanan</button>
+      </div>
+    </section>
+
+    <section id="order-list">
+      <h2>📝 Daftar Pesanan Anda</h2>
+      <ul id="pesanan"></ul>
+      <p><strong>Total:</strong> Rp <span id="total">0</span></p>
+
+      <form action="https://formspree.io/f/xanbbgjq" method="POST">
+        <input type="text" name="nama" placeholder="Username Anda" required />
+        <textarea name="pesanan" id="fieldPesanan" rows="6" readonly placeholder="Daftar pesanan akan muncul di sini"></textarea>
+        <button type="submit">Kirim Pesanan</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 HATCHLINGSTORE.id | Kota Samarinda, Kalimantan Timur
+  </footer>
+
+  <script>
+    let totalHarga = 0;
+    let daftarPesanan = [];
+
+    function tambahPesanan(nama, harga) {
+      const daftar = document.getElementById('pesanan');
+      const item = document.createElement('li');
+      item.textContent = `${nama} - Rp ${harga.toLocaleString('id-ID')}`;
+      daftar.appendChild(item);
+      totalHarga += harga;
+      daftarPesanan.push(`${nama} - Rp ${harga.toLocaleString('id-ID')}`);
+      document.getElementById('total').textContent = totalHarga.toLocaleString('id-ID');
+      document.getElementById('fieldPesanan').value = daftarPesanan.join('\n') + `\n\nTotal: Rp ${totalHarga.toLocaleString('id-ID')}`;
+    }
+  </script>
+
+</body>
+</html>
